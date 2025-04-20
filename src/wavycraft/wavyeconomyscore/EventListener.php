@@ -37,6 +37,11 @@ class EventListener implements Listener {
 
     public function join(PlayerJoinEvent $event) : void{
         $player = $event->getPlayer();
+        $api = WavyEconomyAPI::getInstance();
+
+        if (!$api->hasAccount($player)) {
+            $api->createAccount($player);
+        }
         
         $this->updateTag($player);
     }
