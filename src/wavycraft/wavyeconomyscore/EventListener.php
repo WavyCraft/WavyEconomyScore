@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace wavycraft\wavyeconomyscore;
 
+use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerJoinEvent;
+
 use pocketmine\Server;
 
 use pocketmine\player\Player;
@@ -30,6 +33,12 @@ class EventListener implements Listener {
             );
             $ev->call();
         }
+    }
+
+    public function join(PlayerJoinEvent $event) : void{
+        $player = $event->getPlayer();
+        
+        $this->updateTag($player);
     }
 
     public function balanceChange(BalanceChangeEvent $event) : void{
