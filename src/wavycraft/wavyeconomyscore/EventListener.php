@@ -42,11 +42,10 @@ class EventListener implements Listener {
     }
 
     public function balanceChange(BalanceChangeEvent $event) : void{
-        $player = $event->getPlayer();
+        $playerName = $event->getPlayer();
+        $player = Server::getInstance()->getPlayerExact($playerName);
 
-        Server::getInstance()->getPlayerByPrefix(ucfirst($player));
-
-        if ($player instanceof Player) {
+        if ($player !== null) {
             $this->updateTag($player);
         }
     }
